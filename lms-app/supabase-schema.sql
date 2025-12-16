@@ -181,65 +181,52 @@ CREATE TRIGGER on_auth_user_created
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
 -- =====================================================
--- TEST DATA
+-- TEST DATA (with valid UUIDs)
 -- =====================================================
--- Note: Users must be created through Supabase Auth first.
--- Create these users in Supabase Dashboard > Authentication > Users:
--- 
--- 1. admin@learnflow.com (password: admin123) - Admin user
--- 2. teacher@learnflow.com (password: teacher123) - Teacher user
--- 3. student@learnflow.com (password: student123) - Student user
---
--- Then run the SQL below after creating the users.
-
--- After creating users in Auth, you can update their roles:
--- UPDATE public.users SET role = 'admin', full_name = 'Admin User' WHERE email = 'admin@learnflow.com';
--- UPDATE public.users SET role = 'teacher', full_name = 'Sarah Johnson' WHERE email = 'teacher@learnflow.com';
--- UPDATE public.users SET role = 'student', full_name = 'Alex Chen' WHERE email = 'student@learnflow.com';
 
 -- Insert sample courses
 INSERT INTO public.courses (id, title, description) VALUES
-  ('11111111-1111-1111-1111-111111111111', 'Introduction to Web Development', 'Learn the fundamentals of HTML, CSS, and JavaScript to build modern websites'),
-  ('22222222-2222-2222-2222-222222222222', 'Advanced React Patterns', 'Master advanced React concepts including hooks, context, and performance optimization'),
-  ('33333333-3333-3333-3333-333333333333', 'Database Design Fundamentals', 'Learn how to design efficient and scalable database schemas');
+  ('11111111-aaaa-bbbb-cccc-111111111111', 'Introduction to Web Development', 'Learn the fundamentals of HTML, CSS, and JavaScript to build modern websites'),
+  ('22222222-aaaa-bbbb-cccc-222222222222', 'Advanced React Patterns', 'Master advanced React concepts including hooks, context, and performance optimization'),
+  ('33333333-aaaa-bbbb-cccc-333333333333', 'Database Design Fundamentals', 'Learn how to design efficient and scalable database schemas');
 
 -- Insert course sections
 INSERT INTO public.course_sections (id, course_id, title, order_index) VALUES
   -- Web Development Course
-  ('aaaa1111-1111-1111-1111-111111111111', '11111111-1111-1111-1111-111111111111', 'Getting Started', 0),
-  ('aaaa2222-2222-2222-2222-222222222222', '11111111-1111-1111-1111-111111111111', 'HTML Basics', 1),
-  ('aaaa3333-3333-3333-3333-333333333333', '11111111-1111-1111-1111-111111111111', 'CSS Styling', 2),
-  ('aaaa4444-4444-4444-4444-444444444444', '11111111-1111-1111-1111-111111111111', 'JavaScript Fundamentals', 3),
+  ('aaaaaaaa-1111-1111-1111-aaaaaaaaaaaa', '11111111-aaaa-bbbb-cccc-111111111111', 'Getting Started', 0),
+  ('aaaaaaaa-2222-2222-2222-aaaaaaaaaaaa', '11111111-aaaa-bbbb-cccc-111111111111', 'HTML Basics', 1),
+  ('aaaaaaaa-3333-3333-3333-aaaaaaaaaaaa', '11111111-aaaa-bbbb-cccc-111111111111', 'CSS Styling', 2),
+  ('aaaaaaaa-4444-4444-4444-aaaaaaaaaaaa', '11111111-aaaa-bbbb-cccc-111111111111', 'JavaScript Fundamentals', 3),
   -- React Course
-  ('bbbb1111-1111-1111-1111-111111111111', '22222222-2222-2222-2222-222222222222', 'React Hooks Deep Dive', 0),
-  ('bbbb2222-2222-2222-2222-222222222222', '22222222-2222-2222-2222-222222222222', 'Context and State Management', 1),
-  ('bbbb3333-3333-3333-3333-333333333333', '22222222-2222-2222-2222-222222222222', 'Performance Optimization', 2);
+  ('bbbbbbbb-1111-1111-1111-bbbbbbbbbbbb', '22222222-aaaa-bbbb-cccc-222222222222', 'React Hooks Deep Dive', 0),
+  ('bbbbbbbb-2222-2222-2222-bbbbbbbbbbbb', '22222222-aaaa-bbbb-cccc-222222222222', 'Context and State Management', 1),
+  ('bbbbbbbb-3333-3333-3333-bbbbbbbbbbbb', '22222222-aaaa-bbbb-cccc-222222222222', 'Performance Optimization', 2);
 
 -- Insert pages
 INSERT INTO public.pages (id, section_id, title, order_index) VALUES
   -- Getting Started section
-  ('pppp1111-1111-1111-1111-111111111111', 'aaaa1111-1111-1111-1111-111111111111', 'Welcome to the Course', 0),
-  ('pppp1112-1111-1111-1111-111111111111', 'aaaa1111-1111-1111-1111-111111111111', 'Setting Up Your Environment', 1),
-  ('pppp1113-1111-1111-1111-111111111111', 'aaaa1111-1111-1111-1111-111111111111', 'Your First Web Page', 2),
+  ('cccccccc-1111-1111-1111-cccccccccccc', 'aaaaaaaa-1111-1111-1111-aaaaaaaaaaaa', 'Welcome to the Course', 0),
+  ('cccccccc-1112-1111-1111-cccccccccccc', 'aaaaaaaa-1111-1111-1111-aaaaaaaaaaaa', 'Setting Up Your Environment', 1),
+  ('cccccccc-1113-1111-1111-cccccccccccc', 'aaaaaaaa-1111-1111-1111-aaaaaaaaaaaa', 'Your First Web Page', 2),
   -- HTML Basics section
-  ('pppp2221-2222-2222-2222-222222222222', 'aaaa2222-2222-2222-2222-222222222222', 'HTML Document Structure', 0),
-  ('pppp2222-2222-2222-2222-222222222222', 'aaaa2222-2222-2222-2222-222222222222', 'Common HTML Elements', 1),
-  ('pppp2223-2222-2222-2222-222222222222', 'aaaa2222-2222-2222-2222-222222222222', 'Forms and Input', 2),
-  ('pppp2224-2222-2222-2222-222222222222', 'aaaa2222-2222-2222-2222-222222222222', 'HTML Quiz', 3),
+  ('cccccccc-2221-2222-2222-cccccccccccc', 'aaaaaaaa-2222-2222-2222-aaaaaaaaaaaa', 'HTML Document Structure', 0),
+  ('cccccccc-2222-2222-2222-cccccccccccc', 'aaaaaaaa-2222-2222-2222-aaaaaaaaaaaa', 'Common HTML Elements', 1),
+  ('cccccccc-2223-2222-2222-cccccccccccc', 'aaaaaaaa-2222-2222-2222-aaaaaaaaaaaa', 'Forms and Input', 2),
+  ('cccccccc-2224-2222-2222-cccccccccccc', 'aaaaaaaa-2222-2222-2222-aaaaaaaaaaaa', 'HTML Quiz', 3),
   -- CSS Styling section
-  ('pppp3331-3333-3333-3333-333333333333', 'aaaa3333-3333-3333-3333-333333333333', 'Introduction to CSS', 0),
-  ('pppp3332-3333-3333-3333-333333333333', 'aaaa3333-3333-3333-3333-333333333333', 'Selectors and Properties', 1),
-  ('pppp3333-3333-3333-3333-333333333333', 'aaaa3333-3333-3333-3333-333333333333', 'Flexbox Layout', 2),
+  ('cccccccc-3331-3333-3333-cccccccccccc', 'aaaaaaaa-3333-3333-3333-aaaaaaaaaaaa', 'Introduction to CSS', 0),
+  ('cccccccc-3332-3333-3333-cccccccccccc', 'aaaaaaaa-3333-3333-3333-aaaaaaaaaaaa', 'Selectors and Properties', 1),
+  ('cccccccc-3333-3333-3333-cccccccccccc', 'aaaaaaaa-3333-3333-3333-aaaaaaaaaaaa', 'Flexbox Layout', 2),
   -- JavaScript section
-  ('pppp4441-4444-4444-4444-444444444444', 'aaaa4444-4444-4444-4444-444444444444', 'JavaScript Basics', 0),
-  ('pppp4442-4444-4444-4444-444444444444', 'aaaa4444-4444-4444-4444-444444444444', 'Variables and Data Types', 1),
-  ('pppp4443-4444-4444-4444-444444444444', 'aaaa4444-4444-4444-4444-444444444444', 'Functions and Scope', 2),
-  ('pppp4444-4444-4444-4444-444444444444', 'aaaa4444-4444-4444-4444-444444444444', 'Video Introduction', 3);
+  ('cccccccc-4441-4444-4444-cccccccccccc', 'aaaaaaaa-4444-4444-4444-aaaaaaaaaaaa', 'JavaScript Basics', 0),
+  ('cccccccc-4442-4444-4444-cccccccccccc', 'aaaaaaaa-4444-4444-4444-aaaaaaaaaaaa', 'Variables and Data Types', 1),
+  ('cccccccc-4443-4444-4444-cccccccccccc', 'aaaaaaaa-4444-4444-4444-aaaaaaaaaaaa', 'Functions and Scope', 2),
+  ('cccccccc-4444-4444-4444-cccccccccccc', 'aaaaaaaa-4444-4444-4444-aaaaaaaaaaaa', 'Video Introduction', 3);
 
 -- Insert blocks for "Welcome to the Course" page
 INSERT INTO public.blocks (page_id, type, title, content, options, order_index) VALUES
-  ('pppp1111-1111-1111-1111-111111111111', 'heading', 'Welcome to Web Development!', 'Your journey to becoming a web developer starts here.', NULL, 0),
-  ('pppp1111-1111-1111-1111-111111111111', 'text', 'Course Overview', 'In this comprehensive course, you will learn everything you need to know to build modern, responsive websites. We will cover HTML for structure, CSS for styling, and JavaScript for interactivity.
+  ('cccccccc-1111-1111-1111-cccccccccccc', 'heading', 'Welcome to Web Development!', 'Your journey to becoming a web developer starts here.', NULL, 0),
+  ('cccccccc-1111-1111-1111-cccccccccccc', 'text', 'Course Overview', 'In this comprehensive course, you will learn everything you need to know to build modern, responsive websites. We will cover HTML for structure, CSS for styling, and JavaScript for interactivity.
 
 By the end of this course, you will be able to:
 - Create well-structured HTML documents
@@ -247,26 +234,26 @@ By the end of this course, you will be able to:
 - Add interactivity with JavaScript
 - Build responsive layouts
 - Deploy your projects online', NULL, 1),
-  ('pppp1111-1111-1111-1111-111111111111', 'image', 'Web Development Stack', 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800', NULL, 2),
-  ('pppp1111-1111-1111-1111-111111111111', 'yes_no', 'Ready to Start?', 'Are you excited to begin your web development journey?', NULL, 3);
+  ('cccccccc-1111-1111-1111-cccccccccccc', 'image', 'Web Development Stack', 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800', NULL, 2),
+  ('cccccccc-1111-1111-1111-cccccccccccc', 'yes_no', 'Ready to Start?', 'Are you excited to begin your web development journey?', NULL, 3);
 
 -- Insert blocks for "Setting Up Your Environment" page
 INSERT INTO public.blocks (page_id, type, title, content, options, order_index) VALUES
-  ('pppp1112-1111-1111-1111-111111111111', 'heading', 'Setting Up Your Development Environment', 'Get your tools ready for web development', NULL, 0),
-  ('pppp1112-1111-1111-1111-111111111111', 'text', 'Required Tools', 'Before we start coding, you will need to install a few essential tools:
+  ('cccccccc-1112-1111-1111-cccccccccccc', 'heading', 'Setting Up Your Development Environment', 'Get your tools ready for web development', NULL, 0),
+  ('cccccccc-1112-1111-1111-cccccccccccc', 'text', 'Required Tools', 'Before we start coding, you will need to install a few essential tools:
 
 1. A modern web browser (Chrome, Firefox, or Edge)
 2. A code editor (VS Code is recommended)
 3. Git for version control (optional but recommended)
 
 These tools are free and available for all major operating systems.', NULL, 1),
-  ('pppp1112-1111-1111-1111-111111111111', 'multiple_choice', 'Which code editor will you use?', 'Select the code editor you plan to use for this course:', ARRAY['Visual Studio Code', 'Sublime Text', 'Atom', 'WebStorm', 'Other'], 2),
-  ('pppp1112-1111-1111-1111-111111111111', 'video_post', 'Introduce Yourself', 'Record a short video introducing yourself and sharing what you hope to learn from this course!', NULL, 3);
+  ('cccccccc-1112-1111-1111-cccccccccccc', 'multiple_choice', 'Which code editor will you use?', 'Select the code editor you plan to use for this course:', ARRAY['Visual Studio Code', 'Sublime Text', 'Atom', 'WebStorm', 'Other'], 2),
+  ('cccccccc-1112-1111-1111-cccccccccccc', 'video_post', 'Introduce Yourself', 'Record a short video introducing yourself and sharing what you hope to learn from this course!', NULL, 3);
 
 -- Insert blocks for "HTML Document Structure" page
 INSERT INTO public.blocks (page_id, type, title, content, options, order_index) VALUES
-  ('pppp2221-2222-2222-2222-222222222222', 'heading', 'Understanding HTML Document Structure', 'Learn how HTML documents are organized', NULL, 0),
-  ('pppp2221-2222-2222-2222-222222222222', 'text', 'The Basic Structure', 'Every HTML document follows a standard structure:
+  ('cccccccc-2221-2222-2222-cccccccccccc', 'heading', 'Understanding HTML Document Structure', 'Learn how HTML documents are organized', NULL, 0),
+  ('cccccccc-2221-2222-2222-cccccccccccc', 'text', 'The Basic Structure', 'Every HTML document follows a standard structure:
 
 <!DOCTYPE html> - Declares this is an HTML5 document
 <html> - The root element
@@ -274,28 +261,28 @@ INSERT INTO public.blocks (page_id, type, title, content, options, order_index) 
 <body> - Contains visible content
 
 The DOCTYPE declaration tells the browser which version of HTML to use. The html element wraps everything, while head contains information about the page, and body contains what users see.', NULL, 1),
-  ('pppp2221-2222-2222-2222-222222222222', 'yes_no', 'Knowledge Check', 'Does the <head> element contain the visible content of a webpage?', NULL, 2),
-  ('pppp2221-2222-2222-2222-222222222222', 'file_upload', 'Submit Your First HTML File', 'Create a basic HTML document with the proper structure and upload it here for review.', NULL, 3);
+  ('cccccccc-2221-2222-2222-cccccccccccc', 'yes_no', 'Knowledge Check', 'Does the <head> element contain the visible content of a webpage?', NULL, 2),
+  ('cccccccc-2221-2222-2222-cccccccccccc', 'file_upload', 'Submit Your First HTML File', 'Create a basic HTML document with the proper structure and upload it here for review.', NULL, 3);
 
 -- Insert blocks for "HTML Quiz" page
 INSERT INTO public.blocks (page_id, type, title, content, options, order_index) VALUES
-  ('pppp2224-2222-2222-2222-222222222222', 'heading', 'HTML Knowledge Quiz', 'Test your understanding of HTML basics', NULL, 0),
-  ('pppp2224-2222-2222-2222-222222222222', 'multiple_choice', 'Question 1', 'What does HTML stand for?', ARRAY['Hyper Text Markup Language', 'High Tech Modern Language', 'Hyper Transfer Markup Language', 'Home Tool Markup Language'], 1),
-  ('pppp2224-2222-2222-2222-222222222222', 'multiple_choice', 'Question 2', 'Which HTML element is used for the largest heading?', ARRAY['<h1>', '<heading>', '<h6>', '<head>'], 2),
-  ('pppp2224-2222-2222-2222-222222222222', 'yes_no', 'Question 3', 'Is the <br> tag used to create a line break?', NULL, 3),
-  ('pppp2224-2222-2222-2222-222222222222', 'multiple_choice', 'Question 4', 'Which attribute is used to specify the destination of a link?', ARRAY['href', 'src', 'link', 'url'], 4);
+  ('cccccccc-2224-2222-2222-cccccccccccc', 'heading', 'HTML Knowledge Quiz', 'Test your understanding of HTML basics', NULL, 0),
+  ('cccccccc-2224-2222-2222-cccccccccccc', 'multiple_choice', 'Question 1', 'What does HTML stand for?', ARRAY['Hyper Text Markup Language', 'High Tech Modern Language', 'Hyper Transfer Markup Language', 'Home Tool Markup Language'], 1),
+  ('cccccccc-2224-2222-2222-cccccccccccc', 'multiple_choice', 'Question 2', 'Which HTML element is used for the largest heading?', ARRAY['<h1>', '<heading>', '<h6>', '<head>'], 2),
+  ('cccccccc-2224-2222-2222-cccccccccccc', 'yes_no', 'Question 3', 'Is the <br> tag used to create a line break?', NULL, 3),
+  ('cccccccc-2224-2222-2222-cccccccccccc', 'multiple_choice', 'Question 4', 'Which attribute is used to specify the destination of a link?', ARRAY['href', 'src', 'link', 'url'], 4);
 
 -- Insert blocks for "Video Introduction" page
 INSERT INTO public.blocks (page_id, type, title, content, options, order_index) VALUES
-  ('pppp4444-4444-4444-4444-444444444444', 'heading', 'JavaScript Video Introduction', 'Watch this introduction to JavaScript', NULL, 0),
-  ('pppp4444-4444-4444-4444-444444444444', 'video', 'Introduction to JavaScript', 'https://www.youtube.com/embed/W6NZfCO5SIk', NULL, 1),
-  ('pppp4444-4444-4444-4444-444444444444', 'text', 'Key Takeaways', 'After watching the video, remember these key points:
+  ('cccccccc-4444-4444-4444-cccccccccccc', 'heading', 'JavaScript Video Introduction', 'Watch this introduction to JavaScript', NULL, 0),
+  ('cccccccc-4444-4444-4444-cccccccccccc', 'video', 'Introduction to JavaScript', 'https://www.youtube.com/embed/W6NZfCO5SIk', NULL, 1),
+  ('cccccccc-4444-4444-4444-cccccccccccc', 'text', 'Key Takeaways', 'After watching the video, remember these key points:
 
 - JavaScript adds interactivity to websites
 - It runs in the browser (client-side)
 - Modern JavaScript is powerful and versatile
 - You can also use JavaScript on the server (Node.js)', NULL, 2),
-  ('pppp4444-4444-4444-4444-444444444444', 'video_post', 'Share Your Learning', 'Record a video explaining one concept from the JavaScript introduction that you found interesting!', NULL, 3);
+  ('cccccccc-4444-4444-4444-cccccccccccc', 'video_post', 'Share Your Learning', 'Record a video explaining one concept from the JavaScript introduction that you found interesting!', NULL, 3);
 
 -- =====================================================
 -- INDEXES for better performance
@@ -307,3 +294,25 @@ CREATE INDEX IF NOT EXISTS idx_blocks_page ON public.blocks(page_id);
 CREATE INDEX IF NOT EXISTS idx_enrollments_user ON public.course_enrollments(user_id);
 CREATE INDEX IF NOT EXISTS idx_answers_user ON public.student_answers(user_id);
 CREATE INDEX IF NOT EXISTS idx_video_posts_block ON public.video_posts(block_id);
+
+-- =====================================================
+-- POST-SETUP: After creating users in Auth
+-- =====================================================
+-- 
+-- 1. Create these users in Supabase Dashboard > Authentication > Users:
+--    - admin@learnflow.com (password: admin123)
+--    - teacher@learnflow.com (password: teacher123)
+--    - student@learnflow.com (password: student123)
+--
+-- 2. Then run these commands to update roles:
+--
+-- UPDATE public.users SET role = 'admin', full_name = 'Admin User' WHERE email = 'admin@learnflow.com';
+-- UPDATE public.users SET role = 'teacher', full_name = 'Sarah Johnson' WHERE email = 'teacher@learnflow.com';
+-- UPDATE public.users SET role = 'student', full_name = 'Alex Chen' WHERE email = 'student@learnflow.com';
+--
+-- 3. Enroll student in courses:
+--
+-- INSERT INTO public.course_enrollments (user_id, course_id)
+-- SELECT u.id, c.id 
+-- FROM public.users u, public.courses c
+-- WHERE u.email = 'student@learnflow.com';
